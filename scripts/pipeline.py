@@ -19,10 +19,10 @@ print(df_data2.head(5))
 print(df_data3.head(5))
 
 #delete timestamp
-dropped_columns2 = df_data2.drop(columns="timestamp")
-dropped_columns3 = df_data3.drop(columns="timestamp")
-print(f"verified drop columns: {dropped_columns2}")
-print(f"verified drop columns: {dropped_columns3}")
+df_data2 = df_data2.drop(columns="timestamp")
+df_data3 = df_data3.drop(columns="timestamp")
+print(f"verified drop columns: {df_data2}")
+print(f"verified drop columns: {df_data3}")
 
 #access data
 row_0 = df_data2.iloc[0]
@@ -41,3 +41,31 @@ print(df_data3.mode())
 numeric_columns = ['userId', 'movieId', 'rating']
 numeric_columns_data = df_data3[numeric_columns]
 print(numeric_columns_data.corr())
+
+#filter
+positive_ratings_filter = df_data3[df_data3['rating']>0]
+
+#group
+grouped = positive_ratings_filter.groupby(df_data3['movieId'])
+grouped_and_averaged = grouped.mean()
+print(grouped_and_averaged)
+
+#handling missing data
+columns_to_handle = ['userId', 'rating']
+df_data3 = df_data3[columns_to_handle].apply(pd.to_numeric, errors="coerce")
+
+print(df_data.shape)
+print(df_data.isnull().sum())
+
+print(df_data2.shape)
+print(df_data2.isnull().sum())
+
+print(df_data.shape)
+print(df_data.isnull().sum())
+
+#16 null cells in tags['tag']
+df_data2 = df_data2.dropna()
+print(df_data2.isnull().sum())
+print(df_data2.shape)
+
+

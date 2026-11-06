@@ -1,4 +1,5 @@
 import pandas as pd
+import matplotlib.pylab as plt
 
 #file dir
 file_dir = "/workspaces/COMP603_assignment2/data/movies.csv"
@@ -68,4 +69,19 @@ df_data2 = df_data2.dropna()
 print(df_data2.isnull().sum())
 print(df_data2.shape)
 
+#plot histogram
+df_data3.hist(column="rating", figsize=(15, 10), bins=10)
+plt.savefig('../img/show_histogram')
 
+#get information from columns
+print(df_data2.head())
+print(df_data[['title', 'genres']])
+print(df_data3.iloc[-10])
+print(df_data3[-10:])
+print(df_data3.tail())
+print(df_data3.tail(10))
+df_data2_count = df_data2['tag'].value_counts()
+print(df_data2_count.head())
+plt.clf()
+df_data2_count.head().plot(kind="bar", figsize=(12, 8))
+plt.savefig('../img/show_barchart.png')

@@ -93,3 +93,7 @@ df_data2_count[60:100].plot(kind="bar", figsize=(12,8))
 plt.savefig('../img/show_barchart(60:100).png')
 is_highly_rated = df_data3['rating']>4
 print(df_data3[is_highly_rated].head())
+is_animation = df_data['genres'].str.contains("Animation")
+print(df_data[is_animation].head())
+ratings_count = df_data3.groupby("rating").count()
+print(ratings_count)

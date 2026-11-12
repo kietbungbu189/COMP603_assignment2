@@ -1,5 +1,6 @@
 import pandas as pd
 import matplotlib.pylab as plt
+import re
 
 #file dir
 file_dir = "/workspaces/COMP603_assignment2/data/movies.csv"
@@ -97,3 +98,32 @@ is_animation = df_data['genres'].str.contains("Animation")
 print(df_data[is_animation].head())
 ratings_count = df_data3.groupby("rating").count()
 print(ratings_count)
+print(f"Average of ratings of all movies: {grouped_and_averaged['rating'].mean(axis=0)}")
+average_ratings_bymovies = positive_ratings_filter[['rating', 'movieId']].groupby('movieId').mean()
+print(average_ratings_bymovies.head())
+average_ratings_bymoviestopdown = average_ratings_bymovies.sort_values('rating', ascending=False)
+print(average_ratings_bymoviestopdown.head())
+# changing order of placing the 2 tables to be merged in the parameters brackets of pd.merge() according to the question (Merge the average ratings with movie titles) is a good practice of protecting fact table data (or "main concerned" in this case)
+df_data3 = pd.merge(average_ratings_bymoviestopdown, df_data, how="inner", on="movieId")
+df_data3.drop(columns="genres")
+print(df_data3.head())
+is_comedy = df_data3['genres'].str.contains("Comedy")
+is_comedy = df_data3[is_comedy]
+print(is_comedy.head())
+is_highly_rated2 = is_comedy[is_comedy['rating']>=4.0]
+print(is_highly_rated2.head())
+#use df_data3 instead of df_data to do the following q's
+def find_release_year(list_of_titles):
+    match = re.search(r'\((\d{4})\)', str(list_of_titles))
+    if match:
+        return match.group(1)
+    else:
+        return None
+
+df_data3['release_year'] = df_data3['title'].apply(find_release_year)
+print(df_data3['release_year'].head()) 
+average_rating_peryear = df_data3[['release_year', 'rating']].groupby('release_year').mean()
+print(average_rating_peryear.head())
+plt.clf()
+average_rating_peryear.plot(kind="line", figsize=(12, 8))
+plt.savefig("../img/show_line.png")

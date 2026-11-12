@@ -91,7 +91,7 @@ df_data2_count.head(60).plot(kind="bar", figsize=(12, 8))
 plt.savefig('../img/show_barchart(60).png')
 plt.clf()
 df_data2_count[60:100].plot(kind="bar", figsize=(12,8))
-plt.savefig('../img/show_barchart(60:100).png')
+plt.savefig('../img/show_barchart(60colon100).png')
 is_highly_rated = df_data3['rating']>4
 print(df_data3[is_highly_rated].head())
 is_animation = df_data['genres'].str.contains("Animation")

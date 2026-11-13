@@ -127,3 +127,31 @@ print(average_rating_peryear.head())
 plt.clf()
 average_rating_peryear.plot(kind="line", figsize=(12, 8))
 plt.savefig("../img/show_line.png")
+
+# +
+# Task 1, Q4 — Explain what each dataset represents.
+# Each row in the movies dataset describes one movie, including its ID, title, and genres.
+# Each row in the ratings dataset records the score one user gave one movie.
+# Each row in the tags dataset records a descriptive tag one user assigned to one movie.
+# A movieId can appear multiple times because several users can rate or tag the same movie.
+#
+# Task 2, Q4 — Explain why handling missing data is important.
+# I removed 16 rows from the tags dataset because the tag text was missing.
+# Including those rows in a total tag count would overstate how many descriptions users provided.
+# After cleaning, each remaining row contains a tag that can be used in the analysis.
+#
+# Task 3, Q4 — Interpret the rating distribution.
+# The most common individual rating was [mode] stars.
+# The histogram shows that ratings were concentrated between [lower value] and [upper value] stars.
+# Low ratings were [less common than / about as common as / more common than] high ratings.
+# Overall, users tended to give movies [low / middle-range / high] scores.
+#
+# Task 5, Q4 — Discuss patterns among the highly rated comedies.
+# All five comedies averaged at least 4.0 stars, and the highest average was [value] stars.
+# Of the five movies, [number] also listed [genre] as a genre.
+# For example, [movie title] combined Comedy with [genre] and averaged [value] stars.
+#
+# Task 6, Q4 — Comment on whether newer movies tend to receive higher ratings.
+# Each point on the line chart shows the average movie rating for one release year.
+# Across the years shown, average ratings [generally rose / generally fell / showed no consistent trend].
+# Newer movies therefore [tended to receive higher ratings / tended to receive lower ratings / showed no clear rating advantage] in this dataset.
